@@ -1,10 +1,6 @@
 package gameJava.rolGame;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 
 public class DBWork {
@@ -110,5 +106,33 @@ public class DBWork {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean loginDB(String userName, String userPass) {
+
+        String sql = "SELECT name, password FROM users"; // WHERE name =" + userName;
+
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String dbUsers = (rs.getString("name"));
+                if (dbUsers.equals(userName)) {
+
+                    String dbPass = rs.getString("password");
+
+                    if (dbPass.equals(userPass)) {
+                        return true;
+                    }else{
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
