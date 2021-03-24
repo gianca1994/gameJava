@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 public class DBWork {
 
     private static final String APP_NAME = "DataBase";
-    private static final String dbPatch = "/home/gianca/Escritorio/game-java/src/gameJava/gameJava/";
+    private static final String dbPatch = "/home/gianca/Escritorio/game-java/src/gameJava/rolGame/";
 
     public String AppDatabasePath() {
         return dbPatch + APP_NAME + ".db";
