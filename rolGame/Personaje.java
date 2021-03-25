@@ -1,93 +1,65 @@
 package gameJava.rolGame;
 
-public class Personaje {
-    private final String name;
-    private String password;
-    private String _class;
 
+class Personaje {
+
+    // Atributos BASICOS de cada personaje...
     private int str, agi, _int, speed, life;
-    private int armor, lifeMax, lifeMin, level, exp, expUp;
+
+    // Atributos secundarios BASICOS de cada personaje...
+    private int armor, lifeMax, lifeMin;
+
+    // Stats BASICOS
+    private final int level = 1;
+    private final int exp = 0;
+    private final int expUp = 150;
 
 
-    public Personaje(String userName, String userPass, String userClass, int userStr, int userAgi,
-                     int userInt, int userSpeed, int userLife, int userArmor, int userLifeMax,
-                     int userLifeMin, int userLevel, int userExp, int userExpUp) {
+    public int[] Warrior() {
 
-        // Atributos base de cada personaje...
-        name = userName;
-        password = userPass;
-        _class = userClass;
+        str = 17;
+        agi = 12;
+        _int = 5;
+        speed = 9;
+        life = 15;
 
-        // Atributos principales de cada personaje...
-        str = userStr;
-        agi = userAgi;
-        _int = userInt;
-        speed = userSpeed;
-        life = userLife;
+        armor = 35;
+        lifeMax = 250;
+        lifeMin = 250;
 
-        // Atributos secundarios de cada personaje...
-        armor = userArmor;
-        lifeMax = userLifeMax;
-        lifeMin = userLifeMin;
-        level = userLevel;
-        exp = userExp;
-        expUp = userExpUp;
+        return new int[] {str, agi, _int, speed, life, armor,
+                lifeMax, lifeMin, level, exp, expUp};
     }
 
+    public int[] Mage() {
 
-    public String getName() {
-        return name;
+        str = 7;
+        agi = 9;
+        _int = 17;
+        speed = 11;
+        life = 9;
+
+        armor = 20;
+        lifeMax = 100;
+        lifeMin = 100;
+
+        return new int[] {str, agi, _int, speed, life, armor,
+                lifeMax, lifeMin, level, exp, expUp};
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public int[] Archer() {
 
-    public String get_class() {
-        return _class;
-    }
+        str = 11;
+        agi = 17;
+        _int = 7;
+        speed = 11;
+        life = 13;
 
-    public int getStr() {
-        return str;
-    }
+        armor = 27;
+        lifeMax = 150;
+        lifeMin = 150;
 
-    public int getAgi() {
-        return agi;
-    }
-
-    public int get_int() {
-        return _int;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public int getLife() {
-        return life;
-    }
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public int getLifeMax() {
-        return lifeMax;
-    }
-
-    public int getLifeMin() {
-        return lifeMin;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getExp() {
-        return exp;
-    }
-
-    public int getExpUp() {
-        return expUp;
+        return new int[] {str, agi, _int, speed, life, armor,
+                lifeMax, lifeMin, level, exp, expUp};
     }
 }

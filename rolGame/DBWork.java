@@ -2,7 +2,6 @@ package gameJava.rolGame;
 
 import java.sql.*;
 
-
 public class DBWork {
 
     private static final String APP_NAME = "DataBase";
@@ -75,42 +74,85 @@ public class DBWork {
         }
     }
 
-    public void insert(String name, String password, String clase, int strength, int agillity
-            , int inteligence, int speed, int life, int armor, int lifeMax, int lifeMin
-            , int level, int exp, int expUp) {
+    public boolean insert(String name, String password, int _class) {
 
-        String sql = "INSERT INTO users(name, password, clase, strength, agillity, intelligence," +
-                " speed, life, armor, lifeMax, lifeMin, level, exp, expUp) " +
-                "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO users(name, password, clase, strength, agillity, intelligence" +
+                ", speed, life, armor, lifeMax, lifeMin, level, exp, expUp) values(?,?,?,?,?,?,?,?," +
+                "?,?,?,?,?,?)";
 
-        System.out.println("Holaaa");
+        Personaje statsPj = new Personaje();
+
+        int[] statsWar = statsPj.Warrior();
+        int[] statsMage = statsPj.Mage();
+        int[] statsArch = statsPj.Archer();
+
+        createNewTable();
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setString(2, password);
-            pstmt.setString(3, clase);
-            pstmt.setInt(4, strength);
-            pstmt.setInt(5, agillity);
-            pstmt.setInt(6, inteligence);
-            pstmt.setInt(7, speed);
-            pstmt.setInt(8, life);
-            pstmt.setInt(9, armor);
-            pstmt.setInt(10, lifeMax);
-            pstmt.setInt(11, lifeMin);
-            pstmt.setInt(12, level);
-            pstmt.setInt(13, exp);
-            pstmt.setInt(14, expUp);
 
-            pstmt.executeUpdate();
+
+            switch (_class) {
+                case 1 -> {
+                    pstmt.setString(3, "Warrior");
+                    pstmt.setInt(4, statsWar[0]);
+                    pstmt.setInt(5, statsWar[1]);
+                    pstmt.setInt(6, statsWar[2]);
+                    pstmt.setInt(7, statsWar[3]);
+                    pstmt.setInt(8, statsWar[4]);
+                    pstmt.setInt(9, statsWar[5]);
+                    pstmt.setInt(10, statsWar[6]);
+                    pstmt.setInt(11, statsWar[7]);
+                    pstmt.setInt(12, statsWar[8]);
+                    pstmt.setInt(13, statsWar[9]);
+                    pstmt.setInt(14, statsWar[10]);
+                    pstmt.executeUpdate();
+                    return true;
+                }
+                case 2 -> {
+                    pstmt.setString(3, "Mage");
+                    pstmt.setInt(4, statsMage[0]);
+                    pstmt.setInt(5, statsMage[1]);
+                    pstmt.setInt(6, statsMage[2]);
+                    pstmt.setInt(7, statsMage[3]);
+                    pstmt.setInt(8, statsMage[4]);
+                    pstmt.setInt(9, statsMage[5]);
+                    pstmt.setInt(10, statsMage[6]);
+                    pstmt.setInt(11, statsMage[7]);
+                    pstmt.setInt(12, statsMage[8]);
+                    pstmt.setInt(13, statsMage[9]);
+                    pstmt.setInt(14, statsMage[10]);
+                    pstmt.executeUpdate();
+                    return true;
+                }
+                case 3 -> {
+                    pstmt.setString(3, "Archer");
+                    pstmt.setInt(4, statsArch[0]);
+                    pstmt.setInt(5, statsArch[1]);
+                    pstmt.setInt(6, statsArch[2]);
+                    pstmt.setInt(7, statsArch[3]);
+                    pstmt.setInt(8, statsArch[4]);
+                    pstmt.setInt(9, statsArch[5]);
+                    pstmt.setInt(10, statsArch[6]);
+                    pstmt.setInt(11, statsArch[7]);
+                    pstmt.setInt(12, statsArch[8]);
+                    pstmt.setInt(13, statsArch[9]);
+                    pstmt.setInt(14, statsArch[10]);
+                    pstmt.executeUpdate();
+                    return true;
+                }
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     public boolean loginDB(String userName, String userPass) {
 
-        String sql = "SELECT name, password FROM users"; // WHERE name =" + userName;
+        String sql = "SELECT name, password FROM users";
 
 
         try (Connection conn = this.connect();
