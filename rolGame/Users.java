@@ -6,13 +6,14 @@ public class Users {
 
     Scanner scan = new Scanner(System.in);
     DBWork database = new DBWork();
+    Messages msg = new Messages();
 
     public void loginUser() {
 
-        System.out.println("Para continuar, inicie sesion:");
-        System.out.println("Enter Username");
+        System.out.println(msg.login);
+        System.out.println(msg.setUser);
         String userName = scan.nextLine();
-        System.out.println("Enter Password");
+        System.out.println(msg.setPass);
         String userPassword = scan.nextLine();
 
         boolean checkLogin = database.loginDB(userName, userPassword);
@@ -26,13 +27,15 @@ public class Users {
 
     public void registerUser() {
 
+        System.out.println(msg.register);
 
-        System.out.println("Para continuar, Registrese:");
-        System.out.println("Enter new Username");
+        System.out.println(msg.setNewUser);
         String userNewName = scan.nextLine();
-        System.out.println("Enter new Password");
+
+        System.out.println(msg.setNewPass);
         String userNewPassword = scan.nextLine();
-        System.out.println("Select a class: 1-Warrior, 2-Mage, 3-Archer");
+
+        System.out.println(msg.setNewClass);
         int userNewClass = Integer.parseInt(scan.nextLine());
 
 

@@ -9,16 +9,18 @@ class Game {
         DBWork database = new DBWork();
         Users users = new Users();
         Utilities util = new Utilities();
+        Messages msg = new Messages();
         Scanner scan = new Scanner(System.in);
 
 
+        msg.print_msg(msg.welcome);
+
         boolean verifyCreateDb = database.createAppDatabase();
-        System.out.println("Database connection: " + verifyCreateDb + "\n");
+        msg.print_msg(msg.dbConnection + verifyCreateDb + "\n");
 
         util.timer(5);
 
-        System.out.println("Login or register to continue.");
-        System.out.println("Type 1-For login o 2-For register");
+        msg.print_msg(msg.loginOrRegister);
 
         String opt = scan.nextLine();
         util.clear();
@@ -26,7 +28,7 @@ class Game {
         switch (opt) {
             case "1" -> users.loginUser();
             case "2" -> users.registerUser();
-            default -> throw new IllegalStateException("Unexpected value: " + opt);
+            default -> throw new IllegalStateException(msg.errNumeric + opt);
         }
     }
 
