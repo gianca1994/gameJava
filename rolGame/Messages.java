@@ -14,8 +14,7 @@ public class Messages {
 
     final String loginOrRegister= """
                                 Login or register to continue.
-                                Type 1-For login o 2-For register
-                                """;
+                                Type 1-For login o 2-For register""";
 
     final String login= "To continue, log in...";
     final String setUser = "Enter Username:";

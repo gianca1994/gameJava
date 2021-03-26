@@ -5,7 +5,7 @@ import java.sql.*;
 public class DBWork {
 
     private static final String APP_NAME = "DataBase";
-    private static final String dbPatch = "/home/gianca/Escritorio/game-java/src/gameJava/rolGame/";
+    private static final String dbPatch = "gameJava/rolGame/";
 
     public String AppDatabasePath() {
         return dbPatch + APP_NAME + ".db";
@@ -63,6 +63,7 @@ public class DBWork {
                 + "	level integer NOT NULL,\n"
                 + "	exp integer NOT NULL,\n"
                 + "	expUP integer NOT NULL\n"
+                //+ "	admin text NOT NULL\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(AppDatabase());
@@ -109,6 +110,7 @@ public class DBWork {
                     pstmt.setInt(12, statsWar[8]);
                     pstmt.setInt(13, statsWar[9]);
                     pstmt.setInt(14, statsWar[10]);
+                    //pstmt.setString(15, "FalseAdmin");
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -125,6 +127,7 @@ public class DBWork {
                     pstmt.setInt(12, statsMage[8]);
                     pstmt.setInt(13, statsMage[9]);
                     pstmt.setInt(14, statsMage[10]);
+                    //pstmt.setString(15, "FalseAdmin");
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -141,6 +144,7 @@ public class DBWork {
                     pstmt.setInt(12, statsArch[8]);
                     pstmt.setInt(13, statsArch[9]);
                     pstmt.setInt(14, statsArch[10]);
+                    //pstmt.setString(15, "FalseAdmin");
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -165,14 +169,68 @@ public class DBWork {
                 if (dbUsers.equals(userName)) {
 
                     String dbPass = rs.getString("password");
-
                     if (dbPass.equals(userPass)) {
-                        return true;
-                    }else{
+
+                        //String dbAdmin = rs.getString("admin");
+                        //if (dbAdmin.equals("TrueADMIN")) {
+                            return true;
+                        //}
+                    } else {
                         break;
                     }
                 }
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public void createNewTableNPCs() {
+
+        String sql = "CREATE TABLE IF NOT EXISTS npcs (\n"
+                + "	id integer PRIMARY KEY autoincrement,\n"
+                + "	name text NOT NULL,\n"
+                + "	dmgMax integer NOT NULL,\n"
+                + "	dmgMin integer NOT NULL,\n"
+                + "	armor integer NOT NULL,\n"
+                + "	lifeMax integer NOT NULL,\n"
+                + "	lifeMin integer NOT NULL,\n"
+                + "	level integer NOT NULL,\n"
+                + "	exp integer NOT NULL,\n"
+                + " gold float NOT NULL\n"
+                + ");";
+
+        try (Connection conn = DriverManager.getConnection(AppDatabase());
+             Statement stmt = conn.createStatement()) {
+
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean insertNpc(String name, int dmgMax, int dmgMin, int armor,
+                             int lifeMax, int lifeMin, int level, int exp, int gold) {
+
+        String sql = "INSERT INTO npcs(name, dmgMax, dmgMin, armor, lifeMax, lifeMin" +
+                ", level, exp, gold) values(?,?,?,?,?,?,?,?,?)";
+
+        createNewTableNPCs();
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, name);
+            pstmt.setInt(2, dmgMax);
+            pstmt.setInt(3, dmgMin);
+            pstmt.setInt(4, armor);
+            pstmt.setInt(5, lifeMax);
+            pstmt.setInt(6, lifeMin);
+            pstmt.setInt(7, level);
+            pstmt.setInt(8, exp);
+            pstmt.setInt(9, gold);
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

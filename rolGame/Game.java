@@ -15,6 +15,7 @@ class Game {
 
         msg.print_msg(msg.welcome);
 
+
         boolean verifyCreateDb = database.createAppDatabase();
         msg.print_msg(msg.dbConnection + verifyCreateDb + "\n");
 
