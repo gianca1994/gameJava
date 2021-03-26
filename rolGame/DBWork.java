@@ -90,6 +90,7 @@ public class DBWork {
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, name);
             pstmt.setString(2, password);
 
