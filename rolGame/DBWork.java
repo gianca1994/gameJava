@@ -1,6 +1,7 @@
 package gameJava.rolGame;
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class DBWork {
 
@@ -174,7 +175,7 @@ public class DBWork {
                         boolean dbAdmin = rs.getBoolean("adm");
                         if (dbAdmin) {
                             return 666;
-                        }else{
+                        } else {
                             return 1;
                         }
                     } else {
@@ -232,7 +233,73 @@ public class DBWork {
             pstmt.setInt(7, level);
             pstmt.setInt(8, exp);
             pstmt.setInt(9, gold);
+            pstmt.executeUpdate();
+            return true;
 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public void seeStatsNpcDB(int id) {
+
+        String sql = "SELECT id, name, dmgMax, dmgMin, armor, lifeMax, lifeMin, level, exp," +
+                " gold FROM npcs";
+
+        MenuAdmin menuAdm = new MenuAdmin();
+
+        String dbName;
+        int dbDmgMax, dbDmgMin, dbArmor, dbLifeMax, dbLifeMin, dbLevel, dbExp, dbGold;
+
+        try (Connection conn = this.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int dbIdNpc = rs.getInt("id");
+                if (dbIdNpc == id) {
+
+                    dbName = rs.getString("name");
+                    dbDmgMax = rs.getInt("dmgMax");
+                    dbDmgMin = rs.getInt("dmgMin");
+                    dbArmor = rs.getInt("armor");
+                    dbLifeMax = rs.getInt("lifeMax");
+                    dbLifeMin = rs.getInt("lifeMin");
+                    dbLevel = rs.getInt("level");
+                    dbExp = rs.getInt("exp");
+                    dbGold = rs.getInt("gold");
+
+                    menuAdm.seeStatsNpc(dbName, dbDmgMax, dbDmgMin, dbArmor, dbLifeMax,
+                            dbLifeMin, dbLevel, dbExp, dbGold);
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean editStatsNpcDB(int id, String name, int dmgMax, int dmgMin, int armor, int lifeMax,
+                                  int lifeMin, int level, int exp, int gold) {
+
+        String sql = "UPDATE npcs SET name = ?, dmgMax = ?, dmgMin = ?, armor = ?, lifeMax = ?," +
+                " lifeMin = ?, level = ?, exp = ?, gold = ? WHERE id = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setInt(2, dmgMax);
+            pstmt.setInt(3, dmgMin);
+            pstmt.setInt(4, armor);
+            pstmt.setInt(5, lifeMax);
+            pstmt.setInt(6, lifeMin);
+            pstmt.setInt(7, level);
+            pstmt.setInt(8, exp);
+            pstmt.setInt(9, gold);
+            pstmt.setInt(10, id);
+            pstmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

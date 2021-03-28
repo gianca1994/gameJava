@@ -24,16 +24,16 @@ class Game {
         boolean verifyCreateDb = database.createAppDatabase();
         msg.print_msg(msg.dbConnection + verifyCreateDb + "\n");
 
-        util.timer(5);
+        util.timer(1);
 
         msg.print_msg(msg.loginOrRegister);
 
-        String opt = scan.nextLine();
+        int opt = Integer.parseInt(scan.nextLine());
         util.clear();
 
         switch (opt) {
-            case "1" -> users.loginUser();
-            case "2" -> users.registerUser();
+            case 1 -> users.loginUser();
+            case 2 -> users.registerUser();
             default -> throw new IllegalStateException(msg.errNumeric + opt);
         }
     }

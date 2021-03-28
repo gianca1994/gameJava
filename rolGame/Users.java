@@ -7,6 +7,8 @@ public class Users {
     Scanner scan = new Scanner(System.in);
     DBWork database = new DBWork();
     Messages msg = new Messages();
+    MenuAdmin AdmMenu = new MenuAdmin();
+    MenuUser UserMenu = new MenuUser();
 
     public void loginUser() {
 
@@ -19,9 +21,9 @@ public class Users {
         int checkLogin = database.loginDB(userName, userPassword);
 
         if (checkLogin == 1) {
-            System.out.println("USER LOGGED IN!!");
+            UserMenu.setMenu();
         } else if (checkLogin == 666) {
-            System.out.println("ADMIN LOGGED IN!!");
+            AdmMenu.setMenu();
         } else {
             System.out.println("ERROR WHEN TRYING TO LOGIN !!");
         }
@@ -39,7 +41,6 @@ public class Users {
 
         System.out.println(msg.setNewClass);
         int userNewClass = Integer.parseInt(scan.nextLine());
-
 
         boolean checkRegister = database.insert(userNewName, userNewPassword, userNewClass);
 
