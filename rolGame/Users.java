@@ -16,10 +16,12 @@ public class Users {
         System.out.println(msg.setPass);
         String userPassword = scan.nextLine();
 
-        boolean checkLogin = database.loginDB(userName, userPassword);
+        int checkLogin = database.loginDB(userName, userPassword);
 
-        if (checkLogin) {
+        if (checkLogin == 1) {
             System.out.println("USER LOGGED IN!!");
+        } else if (checkLogin == 666) {
+            System.out.println("ADMIN LOGGED IN!!");
         } else {
             System.out.println("ERROR WHEN TRYING TO LOGIN !!");
         }

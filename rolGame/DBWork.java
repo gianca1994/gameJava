@@ -62,8 +62,8 @@ public class DBWork {
                 + "	lifeMin integer NOT NULL,\n"
                 + "	level integer NOT NULL,\n"
                 + "	exp integer NOT NULL,\n"
-                + "	expUP integer NOT NULL\n"
-                //+ "	admin text NOT NULL\n"
+                + "	expUP integer NOT NULL,\n"
+                + "	adm boolean NOT NULL\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(AppDatabase());
@@ -78,8 +78,8 @@ public class DBWork {
     public boolean insert(String name, String password, int _class) {
 
         String sql = "INSERT INTO users(name, password, clase, strength, agillity, intelligence" +
-                ", speed, life, armor, lifeMax, lifeMin, level, exp, expUp) values(?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?)";
+                ", speed, life, armor, lifeMax, lifeMin, level, exp, expUp, adm) values(?,?,?,?,?,?,?,?," +
+                "?,?,?,?,?,?,?)";
 
         Personaje statsPj = new Personaje();
 
@@ -110,7 +110,7 @@ public class DBWork {
                     pstmt.setInt(12, statsWar[8]);
                     pstmt.setInt(13, statsWar[9]);
                     pstmt.setInt(14, statsWar[10]);
-                    //pstmt.setString(15, "FalseAdmin");
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -127,7 +127,7 @@ public class DBWork {
                     pstmt.setInt(12, statsMage[8]);
                     pstmt.setInt(13, statsMage[9]);
                     pstmt.setInt(14, statsMage[10]);
-                    //pstmt.setString(15, "FalseAdmin");
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -144,7 +144,7 @@ public class DBWork {
                     pstmt.setInt(12, statsArch[8]);
                     pstmt.setInt(13, statsArch[9]);
                     pstmt.setInt(14, statsArch[10]);
-                    //pstmt.setString(15, "FalseAdmin");
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -155,9 +155,9 @@ public class DBWork {
         return false;
     }
 
-    public boolean loginDB(String userName, String userPass) {
+    public int loginDB(String userName, String userPass) {
 
-        String sql = "SELECT name, password FROM users";
+        String sql = "SELECT name, password, adm FROM users";
 
 
         try (Connection conn = this.connect();
@@ -165,16 +165,18 @@ public class DBWork {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                String dbUsers = (rs.getString("name"));
+                String dbUsers = rs.getString("name");
                 if (dbUsers.equals(userName)) {
 
                     String dbPass = rs.getString("password");
                     if (dbPass.equals(userPass)) {
 
-                        //String dbAdmin = rs.getString("admin");
-                        //if (dbAdmin.equals("TrueADMIN")) {
-                            return true;
-                        //}
+                        boolean dbAdmin = rs.getBoolean("adm");
+                        if (dbAdmin) {
+                            return 666;
+                        }else{
+                            return 1;
+                        }
                     } else {
                         break;
                     }
@@ -183,7 +185,7 @@ public class DBWork {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return 0;
     }
 
     public void createNewTableNPCs() {
