@@ -1,15 +1,15 @@
 package gameJava.rolGame.dbWork;
 
-import gameJava.rolGame.admin.Functions;
+import gameJava.rolGame.admin.FunctionsNpc;
 
 import java.sql.*;
 
 public class DbNpcs {
 
     DbConnect dbConnect = new DbConnect();
-    Functions function = new Functions();
+    FunctionsNpc function = new FunctionsNpc();
 
-    public void createNewTableNPCs() {
+    public void createNewTableNPCsDB() {
 
         String sql = "CREATE TABLE IF NOT EXISTS npcs (\n"
                 + "	id integer PRIMARY KEY autoincrement,\n"
@@ -33,13 +33,13 @@ public class DbNpcs {
         }
     }
 
-    public boolean insertNpc(String name, int dmgMax, int dmgMin, int armor,
-                             int lifeMax, int lifeMin, int level, int exp, int gold) {
+    public boolean insertNpcDB(String name, int dmgMax, int dmgMin, int armor,
+                               int lifeMax, int lifeMin, int level, int exp, int gold) {
 
         String sql = "INSERT INTO npcs(name, dmgMax, dmgMin, armor, lifeMax, lifeMin" +
                 ", level, exp, gold) values(?,?,?,?,?,?,?,?,?)";
 
-        createNewTableNPCs();
+        createNewTableNPCsDB();
 
         try (Connection conn = this.dbConnect.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -62,7 +62,7 @@ public class DbNpcs {
         return false;
     }
 
-    public void seeStatsNpcDB(int id) {
+    public boolean seeStatsNpcDB(int id, boolean delete) {
 
         String sql = "SELECT id, name, dmgMax, dmgMin, armor, lifeMax, lifeMin, level, exp," +
                 " gold FROM npcs";
@@ -88,14 +88,21 @@ public class DbNpcs {
                     dbExp = rs.getInt("exp");
                     dbGold = rs.getInt("gold");
 
-                    function.seeStatsNpc(dbName, dbDmgMax, dbDmgMin, dbArmor, dbLifeMax,
-                            dbLifeMin, dbLevel, dbExp, dbGold);
-                    break;
+                    if (delete) {
+                        function.seeInfoNPC(dbName, dbDmgMax, dbDmgMin, dbArmor, dbLifeMax,
+                                dbLifeMin, dbLevel, dbExp, dbGold);
+
+                        return true;
+                    } else {
+                        function.seeStatsNpc(dbName, dbDmgMax, dbDmgMin, dbArmor, dbLifeMax,
+                                dbLifeMin, dbLevel, dbExp, dbGold);
+                    }
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     public boolean editStatsNpcDB(int id, String name, int dmgMax, int dmgMin, int armor, int lifeMax,
@@ -122,5 +129,19 @@ public class DbNpcs {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public void deleteNpcDB(int id) {
+        String sql = "DELETE FROM npcs WHERE id = ?";
+
+        try (Connection conn = this.dbConnect.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

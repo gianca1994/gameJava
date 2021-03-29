@@ -2,15 +2,14 @@ package gameJava.rolGame.admin;
 
 import gameJava.rolGame.Messages;
 import gameJava.rolGame.dbWork.DbNpcs;
+import gameJava.rolGame.dbWork.DbUsers;
 
 import java.util.Scanner;
 
-public class MenuAdmin extends Functions {
+public class MenuAdmin {
 
     Messages msg = new Messages();
     Scanner scan = new Scanner(System.in);
-    DbNpcs dbNpcs = new DbNpcs();
-    Functions functions = new Functions();
 
     public void setMenu() {
 
@@ -19,11 +18,37 @@ public class MenuAdmin extends Functions {
 
         switch (option) {
             case 1:
+                setMenuNPC();
+                break;
+
+            case 2:
+                setMenuUser();
+
+            case 3:
+                System.exit(0);
+
+            default:
+                setMenu();
+                throw new IllegalStateException(msg.errNumeric + option);
+
+        }
+    }
+
+    public void setMenuNPC() {
+
+        DbNpcs dbNpcs = new DbNpcs();
+        FunctionsNpc functions = new FunctionsNpc();
+
+        msg.print(msg.menuNPCAdmin);
+        int opt = Integer.parseInt(scan.nextLine());
+
+        switch (opt) {
+            case 1:
                 functions.addNewNpc();
                 break;
 
             case 2:
-                dbNpcs.seeStatsNpcDB(functions.setSeeIdNpc());
+                dbNpcs.seeStatsNpcDB(functions.setSeeIdNpc(), false);
 
             case 3:
 
@@ -43,10 +68,36 @@ public class MenuAdmin extends Functions {
                 );
                 System.out.println(resultEditNpc);
 
+            case 4:
+                functions.deleteNpc();
+
+            case 5:
+                System.exit(0);
+
             default:
                 setMenu();
-                throw new IllegalStateException(msg.errNumeric + option);
+                throw new IllegalStateException(msg.errNumeric + opt);
 
+        }
+    }
+
+    public void setMenuUser() {
+
+        FunctionsUsers functionsUsers = new FunctionsUsers();
+        DbUsers dbUser = new DbUsers();
+
+        msg.print(msg.menuUsersAdmin);
+        int opt = Integer.parseInt(scan.nextLine());
+
+        switch (opt) {
+            case 1:
+                dbUser.seeStatsUserDB(functionsUsers.setSeeIdUser(), false);
+
+            case 2:
+                System.exit(0);
+            default:
+                setMenu();
+                throw new IllegalStateException(msg.errNumeric + opt);
         }
     }
 }

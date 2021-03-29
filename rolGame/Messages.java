@@ -61,9 +61,22 @@ public class Messages {
 
     public final String menuAdmin = """
             Select an option to continue:
-            1- add new NPCs
-            2- see Npc
-            3- edit NPCs""";
+            1- Work NPCs
+            2- Work Users
+            3- Exit""";
+
+    public final String menuNPCAdmin = """
+            Select an option to continue:
+            1- Add new NPC
+            2- See Npc
+            3- Edit NPC
+            4- Delete Npc
+            5- Exit""";
+
+    public final String menuUsersAdmin = """
+            Select an option to continue:
+            1- See User
+            2- Exit""";
     ///////// FIN DE CONSTANTES DE MENU /////////
 
 
@@ -80,16 +93,46 @@ public class Messages {
     /////////  FIN DE CONSTANTES PARA AGREGAR NPC /////////
 
 
+    //////////// CONSTANTES PARA LOS USUARIOS ////////////
+    public final String nameUser = "Name: ";
+    public final String passUser = "Password: ";
+    public final String classUser = "Class: ";
+    public final String strUser = "Str: ";
+    public final String agiUser = "Agi: ";
+    public final String intUser = "Int: ";
+    public final String speedUser = "Speed: ";
+    public final String lifeUser = "Life: ";
+    public final String armorUser = "Armor: ";
+    public final String lifeMaxUser = "lifeMax: ";
+    public final String lifeMinUser = "lifeMin: ";
+    public final String levelUser = "Level: ";
+    public final String expUser = "Exp: ";
+    public final String expUpUser = "ExpUp: ";
+    public final String admUser = "Admin: ";
+    /////////  FIN DE CONSTANTES PARA LOS USUARIOS /////////
+
+
     /////////////// CONSTANTES PARA EL ADMIN ///////////////
     public final String seeNpcID = "Select the ID of the npc to see: ";
-    public final String editNpcID = "Select the ID of the npc to edit:";
     public final String npcStats = "Npc stats: ";
+
     public final String confirmAddNpc = "Are you sure you want to add the npc?";
+    public final String npcAdded = "¡¡Npc added!!";
+    public final String npcFailAdded = "¡¡Error adding the npc!!";
+
+    public final String editNpcID = "Select the ID of the npc to edit:";
     public final String confirmEditNpc = "Are you sure you want to edit the npc?";
     public final String npcEdited = "¡¡Npc Edited!!";
     public final String npcFailEdited = "¡¡Error editing the npc!!";
-    public final String npcAdded = "¡¡Npc added!!";
-    public final String npcFailAdded = "¡¡Error adding the npc!!";
+
+    public final String deleteNpcID = "Select the ID of the npc to delete:";
+    public final String confirmDeleteNpc = "Are you sure you want to delete the npc?";
+    public final String npcDeleted = "¡¡Npc Deleted!!";
+    public final String npcFailDeleted = "¡¡Error deleting the npc!!";
+
+    /////////// FIN DE CONSTANTES PARA NPC Y COMIENZO DE CONSTANTES PARA USUARIO ///////////
+
+    public final String seeUserID = "Select the ID of the user to see: ";
     /////////// FIN DE CONSTANTES PARA EL ADMIN ///////////
 
 }

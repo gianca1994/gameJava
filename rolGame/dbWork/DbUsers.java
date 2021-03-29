@@ -1,6 +1,7 @@
 package gameJava.rolGame.dbWork;
 
-import gameJava.rolGame.Personaje;
+import gameJava.rolGame.admin.FunctionsUsers;
+import gameJava.rolGame.models.Personaje;
 
 import java.sql.*;
 
@@ -149,5 +150,59 @@ public class DbUsers {
             System.out.println(e.getMessage());
         }
         return 0;
+    }
+
+    public boolean seeStatsUserDB(int id, boolean delete) {
+
+        String sql = "SELECT id, name, password, clase, strength, agillity, intelligence, " +
+                "speed, life, armor, lifeMax, lifeMin, level, exp, expUp, adm FROM users";
+
+        FunctionsUsers functionsUsers = new FunctionsUsers();
+
+        String name, password, clase;
+        int strength, agillity, intelligence, speed, life, armor, lifeMax, lifeMin, level,
+                exp, expUp, adm;
+
+        try (Connection conn = this.dbConnect.connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int dbIdNpc = rs.getInt("id");
+                if (dbIdNpc == id) {
+
+                    name = rs.getString("name");
+                    password = rs.getString("password");
+                    clase = rs.getString("clase");
+                    strength = rs.getInt("strength");
+                    agillity = rs.getInt("agillity");
+                    intelligence = rs.getInt("intelligence");
+                    speed = rs.getInt("speed");
+                    life = rs.getInt("life");
+                    armor = rs.getInt("armor");
+                    lifeMax = rs.getInt("lifeMax");
+                    lifeMin = rs.getInt("lifeMin");
+                    level = rs.getInt("level");
+                    exp = rs.getInt("exp");
+                    expUp = rs.getInt("expUp");
+                    adm = rs.getInt("adm");
+
+
+                    if (delete) {
+                        //function.seeInfoNPC(dbName, dbDmgMax, dbDmgMin, dbArmor, dbLifeMax,
+                        //        dbLifeMin, dbLevel, dbExp, dbGold);
+
+                        return true;
+                    } else {
+                        functionsUsers.seeStatsUser(name, password, clase, strength, agillity,
+                                intelligence, speed, life, armor, lifeMax, lifeMin,
+                                level, exp, expUp, adm);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
