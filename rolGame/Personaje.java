@@ -1,7 +1,7 @@
 package gameJava.rolGame;
 
 
-class Personaje {
+public class Personaje {
 
     // Atributos BASICOS de cada personaje...
     private int str, agi, _int, speed, life;
@@ -27,7 +27,7 @@ class Personaje {
         lifeMax = 250;
         lifeMin = 250;
 
-        return new int[] {str, agi, _int, speed, life, armor,
+        return new int[]{str, agi, _int, speed, life, armor,
                 lifeMax, lifeMin, level, exp, expUp};
     }
 

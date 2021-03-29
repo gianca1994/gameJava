@@ -1,51 +1,14 @@
-package gameJava.rolGame;
+package gameJava.rolGame.dbWork;
+
+import gameJava.rolGame.Personaje;
 
 import java.sql.*;
 
-public class DBWork {
+public class DbUsers {
 
-    private static final String APP_NAME = "DataBase";
-    private static final String dbPatch = "/home/gianca/Escritorio/game-java/src/gameJava/rolGame/";
+    DbConnect dbConnect = new DbConnect();
 
-    public String AppDatabasePath() {
-        return dbPatch + APP_NAME + ".db";
-    }
-
-    public String AppDatabase() {
-        return "jdbc:sqlite:" + AppDatabasePath();
-    }
-
-    private Connection connect() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(AppDatabase());
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
-    public boolean createAppDatabase() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = null;
-            try {
-                conn = DriverManager.getConnection(AppDatabase());
-                if (conn != null) {
-                    conn.close();
-                    return true;
-                }
-            } catch (SQLException x) {
-                //todo
-            }
-        } catch (ClassNotFoundException x) {
-            //todo
-        }
-
-        return false;
-    }
-
-    public void createNewTable() {
+    public void createNewTableUser() {
 
         String sql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + "	id integer PRIMARY KEY autoincrement,\n"
@@ -62,10 +25,11 @@ public class DBWork {
                 + "	lifeMin integer NOT NULL,\n"
                 + "	level integer NOT NULL,\n"
                 + "	exp integer NOT NULL,\n"
-                + "	expUP integer NOT NULL\n"
+                + "	expUP integer NOT NULL,\n"
+                + "	adm boolean NOT NULL\n"
                 + ");";
 
-        try (Connection conn = DriverManager.getConnection(AppDatabase());
+        try (Connection conn = DriverManager.getConnection(dbConnect.AppDatabase());
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(sql);
@@ -74,11 +38,11 @@ public class DBWork {
         }
     }
 
-    public boolean insert(String name, String password, int _class) {
+    public boolean insertUser(String name, String password, int _class) {
 
         String sql = "INSERT INTO users(name, password, clase, strength, agillity, intelligence" +
-                ", speed, life, armor, lifeMax, lifeMin, level, exp, expUp) values(?,?,?,?,?,?,?,?," +
-                "?,?,?,?,?,?)";
+                ", speed, life, armor, lifeMax, lifeMin, level, exp, expUp, adm) values(?,?,?,?,?,?,?,?," +
+                "?,?,?,?,?,?,?)";
 
         Personaje statsPj = new Personaje();
 
@@ -86,9 +50,9 @@ public class DBWork {
         int[] statsMage = statsPj.Mage();
         int[] statsArch = statsPj.Archer();
 
-        createNewTable();
+        createNewTableUser();
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.dbConnect.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, name);
@@ -109,6 +73,7 @@ public class DBWork {
                     pstmt.setInt(12, statsWar[8]);
                     pstmt.setInt(13, statsWar[9]);
                     pstmt.setInt(14, statsWar[10]);
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -125,6 +90,7 @@ public class DBWork {
                     pstmt.setInt(12, statsMage[8]);
                     pstmt.setInt(13, statsMage[9]);
                     pstmt.setInt(14, statsMage[10]);
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -141,6 +107,7 @@ public class DBWork {
                     pstmt.setInt(12, statsArch[8]);
                     pstmt.setInt(13, statsArch[9]);
                     pstmt.setInt(14, statsArch[10]);
+                    pstmt.setBoolean(15, false);
                     pstmt.executeUpdate();
                     return true;
                 }
@@ -151,24 +118,29 @@ public class DBWork {
         return false;
     }
 
-    public boolean loginDB(String userName, String userPass) {
+    public int loginDB(String userName, String userPass) {
 
-        String sql = "SELECT name, password FROM users";
+        String sql = "SELECT name, password, adm FROM users";
 
 
-        try (Connection conn = this.connect();
+        try (Connection conn = this.dbConnect.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                String dbUsers = (rs.getString("name"));
+                String dbUsers = rs.getString("name");
                 if (dbUsers.equals(userName)) {
 
                     String dbPass = rs.getString("password");
-
                     if (dbPass.equals(userPass)) {
-                        return true;
-                    }else{
+
+                        boolean dbAdmin = rs.getBoolean("adm");
+                        if (dbAdmin) {
+                            return 666;
+                        } else {
+                            return 1;
+                        }
+                    } else {
                         break;
                     }
                 }
@@ -176,6 +148,6 @@ public class DBWork {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return 0;
     }
 }
