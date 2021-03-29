@@ -1,5 +1,8 @@
 package gameJava.rolGame;
 
+import gameJava.rolGame.dbWork.DBWork;
+import gameJava.rolGame.users.Users;
+
 import javax.swing.*;
 import java.util.Scanner;
 
@@ -18,15 +21,15 @@ class Game {
         //frmGame frmGame = new frmGame();
         //frmGame.setVisible(true);
 
-        msg.print_msg(msg.welcome);
+        msg.print(msg.welcome);
 
 
         boolean verifyCreateDb = database.createAppDatabase();
-        msg.print_msg(msg.dbConnection + verifyCreateDb + "\n");
+        msg.print(msg.dbConnection + verifyCreateDb + "\n");
 
         util.timer(1);
 
-        msg.print_msg(msg.loginOrRegister);
+        msg.print(msg.loginOrRegister);
 
         int opt = Integer.parseInt(scan.nextLine());
         util.clear();

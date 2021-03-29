@@ -1,7 +1,7 @@
 package gameJava.rolGame;
 
 
-class Personaje {
+public class Personaje {
 
     // Atributos BASICOS de cada personaje...
     private int str, agi, _int, speed, life;

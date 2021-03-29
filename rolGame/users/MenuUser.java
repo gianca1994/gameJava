@@ -1,4 +1,6 @@
-package gameJava.rolGame;
+package gameJava.rolGame.users;
+
+import gameJava.rolGame.Messages;
 
 public class MenuUser {
 
@@ -6,7 +8,7 @@ public class MenuUser {
 
         Messages msg = new Messages();
 
-        msg.print_msg(msg.menuUser);
+        msg.print(msg.menuUser);
 
     }
 }

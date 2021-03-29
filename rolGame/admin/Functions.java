@@ -1,62 +1,33 @@
-package gameJava.rolGame;
+package gameJava.rolGame.admin;
+
+import gameJava.rolGame.Messages;
+import gameJava.rolGame.dbWork.DbNpcs;
 
 import java.util.Scanner;
 
-public class MenuAdmin {
-
+public class Functions extends Messages {
     Messages msg = new Messages();
     Scanner scan = new Scanner(System.in);
-    DBWork db = new DBWork();
-
 
     private String nameNpc;
     private int idNpc, dmgMax, dmgMin, armor, lifeMax, lifeMin, level, exp, gold;
 
-    public void setMenu() {
-        MenuAdmin menuAdm = new MenuAdmin();
-        msg.print_msg(msg.menuAdmin);
-        int option = Integer.parseInt(scan.nextLine());
-
-        switch (option) {
-            case 1:
-                addNewNpc();
-                break;
-
-            case 2:
-                msg.print_msg("Select the ID of the npc to see: ");
-                idNpc = Integer.parseInt(scan.nextLine());
-                db.seeStatsNpcDB(idNpc);
-
-            case 3:
-                msg.print_msg("Select the ID of the npc to edit:");
-                idNpc = Integer.parseInt(scan.nextLine());
-                nameNpc = setNameNpc();
-                int[] newStats = menuAdm.editNpc(nameNpc);
-
-                boolean hola = db.editStatsNpcDB(idNpc, nameNpc, newStats[0], newStats[1], newStats[2], newStats[3],
-                        newStats[4], newStats[5], newStats[6], newStats[7]);
-                System.out.println(hola);
-
-            default:
-                setMenu();
-                throw new IllegalStateException(msg.errNumeric + option);
-
-        }
-    }
-
     public void seeStatsNpc(String dbNameNpc, int dbDmgMax, int dbDmgMin, int dbArmor, int dbLifeMax, int dbLifeMin,
                             int dbLevel, int dbExp, int dbGold) {
+        MenuAdmin menuAdm = new MenuAdmin();
 
-        System.out.println("Npc stats: " + dbNameNpc + "");
-        System.out.println(msg.dmgMaxNpc + dbDmgMax + ", " + msg.dmgMinNpc + dbDmgMin + ", " +
+        msg.print(msg.npcStats + dbNameNpc + "");
+        msg.print(msg.dmgMaxNpc + dbDmgMax + ", " + msg.dmgMinNpc + dbDmgMin + ", " +
                 msg.armorNpc + dbArmor + ", " + msg.lifeMaxNpc + dbLifeMax + ", " +
                 msg.lifeMinNpc + dbLifeMin + ", " + msg.levelNpc + dbLevel + ", " +
                 msg.expNpc + dbExp + ", " + msg.goldNpc + dbGold + "\n\n");
 
-        setMenu();
+        menuAdm.setMenu();
     }
 
     public int[] editNpc(String dbNpcName) {
+
+        MenuAdmin menuAdm = new MenuAdmin();
 
         dmgMax = setDmgMaxNpc();
         dmgMin = setDmgMinNpc();
@@ -67,25 +38,27 @@ public class MenuAdmin {
         exp = setExpNpc();
         gold = setGoldNpc();
 
-        System.out.println("Are you sure you want to edit the npc?");
+        msg.print(msg.confirmEditNpc);
 
-        System.out.println(msg.nameNpc + dbNpcName + ", " + msg.dmgMaxNpc + dmgMax + ", " +
+        msg.print(msg.nameNpc + dbNpcName + ", " + msg.dmgMaxNpc + dmgMax + ", " +
                 msg.dmgMinNpc + dmgMin + ", " + msg.armorNpc + armor + ", " + msg.lifeMaxNpc +
                 lifeMax + ", " + msg.lifeMinNpc + lifeMin + ", " + msg.levelNpc + level + ", " +
                 msg.expNpc + exp + ", " + msg.goldNpc + gold);
 
         if (verifyCreateNewNpc() == 1) {
-            System.out.println("NPC EDITADO!!");
+            msg.print(msg.npcEdited);
             return new int[]{dmgMax, dmgMin, armor,
                     lifeMax, lifeMin, level, exp, gold};
         } else {
-            System.out.println("FALLO AL REGISTRAR NPC!!");
+            msg.print(msg.npcFailEdited);
         }
-        setMenu();
+        menuAdm.setMenu();
         return new int[]{};
     }
 
     public void addNewNpc() {
+        DbNpcs dbNpcs = new DbNpcs();
+        MenuAdmin menuAdm = new MenuAdmin();
 
         nameNpc = setNameNpc();
         dmgMax = setDmgMaxNpc();
@@ -97,88 +70,102 @@ public class MenuAdmin {
         exp = setExpNpc();
         gold = setGoldNpc();
 
-        System.out.println("Are you sure you want to register the npc?");
-        System.out.println(msg.nameNpc + nameNpc + ", " + msg.dmgMaxNpc + dmgMax + ", " +
+        msg.print(msg.confirmAddNpc);
+        msg.print(msg.nameNpc + nameNpc + ", " + msg.dmgMaxNpc + dmgMax + ", " +
                 msg.dmgMinNpc + dmgMin + ", " + msg.armorNpc + armor + ", " + msg.lifeMaxNpc +
                 lifeMax + ", " + msg.lifeMinNpc + lifeMin + ", " + msg.levelNpc + level + ", " +
                 msg.expNpc + exp + ", " + msg.goldNpc + gold);
 
         if (verifyCreateNewNpc() == 1) {
-            boolean checkNpcAdd = db.insertNpc(nameNpc, dmgMax, dmgMin, armor,
+            boolean checkNpcAdd = dbNpcs.insertNpc(nameNpc, dmgMax, dmgMin, armor,
                     lifeMax, lifeMin, level, exp, gold);
             if (checkNpcAdd) {
-                System.out.println("NPC REGISTRADO!!");
+                msg.print(msg.npcAdded);
             } else {
-                System.out.println("FALLO AL REGISTRAR NPC!!");
+                msg.print(msg.npcFailAdded);
             }
         }
-        setMenu();
+        menuAdm.setMenu();
     }
 
-    private int verifyCreateNewNpc() {
-        System.out.println("1- Yes / 2- No");
+    public int verifyCreateNewNpc() {
+        msg.print("1- Yes / 2- No");
         return Integer.parseInt(scan.nextLine());
     }
 
-    private String setNameNpc() {
+    public int setSeeIdNpc() {
 
-        System.out.println(msg.nameNpc);
+        msg.print(msg.seeNpcID);
+        idNpc = Integer.parseInt(scan.nextLine());
+        return idNpc;
+    }
+
+    public int setEditIdNpc() {
+
+        msg.print(msg.editNpcID);
+        idNpc = Integer.parseInt(scan.nextLine());
+        return idNpc;
+    }
+
+    public String setNameNpc() {
+
+        msg.print(msg.nameNpc);
         nameNpc = scan.nextLine();
         return nameNpc;
     }
 
-    private int setDmgMaxNpc() {
+    public int setDmgMaxNpc() {
 
-        System.out.println(msg.dmgMaxNpc);
+        msg.print(msg.dmgMaxNpc);
         dmgMax = Integer.parseInt(scan.nextLine());
         return dmgMax;
     }
 
-    private int setDmgMinNpc() {
+    public int setDmgMinNpc() {
 
-        System.out.println(msg.dmgMinNpc);
+        msg.print(msg.dmgMinNpc);
         dmgMin = Integer.parseInt(scan.nextLine());
         return dmgMin;
     }
 
-    private int setArmorNpc() {
+    public int setArmorNpc() {
 
-        System.out.println(msg.armorNpc);
+        msg.print(msg.armorNpc);
         armor = Integer.parseInt(scan.nextLine());
         return armor;
     }
 
-    private int setLifeMaxNpc() {
+    public int setLifeMaxNpc() {
 
-        System.out.println(msg.lifeMaxNpc);
+        msg.print(msg.lifeMaxNpc);
         lifeMax = Integer.parseInt(scan.nextLine());
         return lifeMax;
     }
 
-    private int setLifeMinNpc() {
+    public int setLifeMinNpc() {
 
-        System.out.println(msg.lifeMinNpc);
+        msg.print(msg.lifeMinNpc);
         lifeMin = Integer.parseInt(scan.nextLine());
         return lifeMin;
     }
 
-    private int setLevelNpc() {
+    public int setLevelNpc() {
 
-        System.out.println(msg.levelNpc);
+        msg.print(msg.levelNpc);
         level = Integer.parseInt(scan.nextLine());
         return level;
     }
 
-    private int setExpNpc() {
+    public int setExpNpc() {
 
-        System.out.println(msg.expNpc);
+        msg.print(msg.expNpc);
         exp = Integer.parseInt(scan.nextLine());
         return exp;
     }
 
-    private int setGoldNpc() {
+    public int setGoldNpc() {
 
-        System.out.println(msg.goldNpc);
+        msg.print(msg.goldNpc);
         gold = Integer.parseInt(scan.nextLine());
         return gold;
     }
