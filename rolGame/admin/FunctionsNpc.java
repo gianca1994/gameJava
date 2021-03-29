@@ -5,7 +5,7 @@ import gameJava.rolGame.dbWork.DbNpcs;
 
 import java.util.Scanner;
 
-public class Functions extends Messages {
+public class FunctionsNpc extends Messages {
     Messages msg = new Messages();
     Scanner scan = new Scanner(System.in);
     MenuAdmin menuAdm = new MenuAdmin();
@@ -45,8 +45,8 @@ public class Functions extends Messages {
         menuAdm.setMenu();
     }
 
-    public void seeStatsNpc(String dbNameNpc, int dbDmgMax, int dbDmgMin, int dbArmor, int dbLifeMax, int dbLifeMin,
-                            int dbLevel, int dbExp, int dbGold) {
+    public void seeStatsNpc(String dbNameNpc, int dbDmgMax, int dbDmgMin, int dbArmor,
+                            int dbLifeMax, int dbLifeMin, int dbLevel, int dbExp, int dbGold) {
 
         msg.print(msg.npcStats + dbNameNpc + "");
         msg.print(msg.dmgMaxNpc + dbDmgMax + ", " + msg.dmgMinNpc + dbDmgMin + ", " +

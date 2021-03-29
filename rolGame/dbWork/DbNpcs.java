@@ -1,15 +1,13 @@
 package gameJava.rolGame.dbWork;
 
-import gameJava.rolGame.Messages;
-import gameJava.rolGame.admin.Functions;
+import gameJava.rolGame.admin.FunctionsNpc;
 
 import java.sql.*;
 
 public class DbNpcs {
 
     DbConnect dbConnect = new DbConnect();
-    Functions function = new Functions();
-    Messages msg = new Messages();
+    FunctionsNpc function = new FunctionsNpc();
 
     public void createNewTableNPCsDB() {
 

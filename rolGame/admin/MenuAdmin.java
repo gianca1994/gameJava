@@ -2,6 +2,7 @@ package gameJava.rolGame.admin;
 
 import gameJava.rolGame.Messages;
 import gameJava.rolGame.dbWork.DbNpcs;
+import gameJava.rolGame.dbWork.DbUsers;
 
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class MenuAdmin {
                 break;
 
             case 2:
-                msg.print("NOT FOUND - 404 JEJEJEJE");
+                setMenuUser();
 
             case 3:
                 System.exit(0);
@@ -36,7 +37,7 @@ public class MenuAdmin {
     public void setMenuNPC() {
 
         DbNpcs dbNpcs = new DbNpcs();
-        Functions functions = new Functions();
+        FunctionsNpc functions = new FunctionsNpc();
 
         msg.print(msg.menuNPCAdmin);
         int opt = Integer.parseInt(scan.nextLine());
@@ -77,6 +78,26 @@ public class MenuAdmin {
                 setMenu();
                 throw new IllegalStateException(msg.errNumeric + opt);
 
+        }
+    }
+
+    public void setMenuUser() {
+
+        FunctionsUsers functionsUsers = new FunctionsUsers();
+        DbUsers dbUser = new DbUsers();
+
+        msg.print(msg.menuUsersAdmin);
+        int opt = Integer.parseInt(scan.nextLine());
+
+        switch (opt) {
+            case 1:
+                dbUser.seeStatsUserDB(functionsUsers.setSeeIdUser(), false);
+
+            case 2:
+                System.exit(0);
+            default:
+                setMenu();
+                throw new IllegalStateException(msg.errNumeric + opt);
         }
     }
 }
