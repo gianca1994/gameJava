@@ -1,6 +1,6 @@
 package gameJava.rolGame.dbWork;
 
-import gameJava.rolGame.Personaje;
+import gameJava.rolGame.models.Personaje;
 
 import java.sql.*;
 
