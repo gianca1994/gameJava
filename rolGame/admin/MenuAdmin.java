@@ -1,8 +1,8 @@
-package gameJava.rolGame.admin;
+package rolGame.admin;
 
-import gameJava.rolGame.Messages;
-import gameJava.rolGame.dbWork.DbNpcs;
-import gameJava.rolGame.dbWork.DbUsers;
+import rolGame.Messages;
+import rolGame.dbWork.DbNpcs;
+import rolGame.dbWork.DbUsers;
 
 import java.util.Scanner;
 

@@ -1,13 +1,11 @@
-package gameJava.rolGame;
+package rolGame;
 
-import gameJava.rolGame.dbWork.DBWork;
-import gameJava.rolGame.users.Users;
-import gameJava.rolGame.frms.frmInitial;
+import rolGame.dbWork.DBWork;
+import rolGame.users.Users;
+import rolGame.frms.frmInitial;
 
 import javax.swing.*;
 import java.util.Scanner;
-
-import static java.lang.Thread.sleep;
 
 
 class Game {
@@ -21,9 +19,9 @@ class Game {
 
         // FORMULARIO INICIAL
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        frmInitial frmInitial = new frmInitial();
+        frmInitial frminitial = new frmInitial();
 
-        frmInitial.setVisible(true);
+        frminitial.setVisible(true);
 
         msg.print(msg.welcome);
 

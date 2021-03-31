@@ -1,6 +1,6 @@
-package gameJava.rolGame.dbWork;
+package rolGame.dbWork;
 
-import gameJava.rolGame.Messages;
+import rolGame.Messages;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

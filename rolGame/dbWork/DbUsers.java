@@ -1,9 +1,9 @@
-package gameJava.rolGame.dbWork;
+package rolGame.dbWork;
 
-import gameJava.rolGame.admin.FunctionsUsers;
-import gameJava.rolGame.admin.MenuAdmin;
-import gameJava.rolGame.models.Personaje;
-import gameJava.rolGame.users.MenuUser;
+import rolGame.admin.FunctionsUsers;
+import rolGame.admin.MenuAdmin;
+import rolGame.models.Personaje;
+import rolGame.users.MenuUser;
 
 import java.sql.*;
 

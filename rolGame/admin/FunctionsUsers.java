@@ -1,6 +1,6 @@
-package gameJava.rolGame.admin;
+package rolGame.admin;
 
-import gameJava.rolGame.Messages;
+import rolGame.Messages;
 
 import java.util.Scanner;
 

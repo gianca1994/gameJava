@@ -1,6 +1,6 @@
-package gameJava.rolGame.frms;
+package rolGame.frms;
 
-import gameJava.rolGame.dbWork.DbUsers;
+import rolGame.dbWork.DbUsers;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

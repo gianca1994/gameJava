@@ -1,4 +1,4 @@
-package gameJava.rolGame;
+package rolGame;
 
 public class Messages {
 
@@ -10,7 +10,7 @@ public class Messages {
     //////////// CONSTANTES PARA LA BASE DE DATOS ////////////
     public final String dbConnection = "Database connection: ";
     public final String appName = "DataBase";
-    public final String dbPatch = "gameJava/rolGame/";
+    public final String dbPatch = "src/rolGame/";
     public final String dbType = "jdbc:sqlite:";
     public final String dbExtension = ".db";
     ///////// FIN DE CONSTANTES PARA LA BASE DE DATOS /////////

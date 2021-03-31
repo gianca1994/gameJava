@@ -1,6 +1,6 @@
-package gameJava.rolGame.users;
+package rolGame.users;
 
-import gameJava.rolGame.Messages;
+import rolGame.Messages;
 
 public class MenuUser {
 
