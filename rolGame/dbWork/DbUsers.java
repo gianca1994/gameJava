@@ -1,13 +1,17 @@
 package gameJava.rolGame.dbWork;
 
 import gameJava.rolGame.admin.FunctionsUsers;
+import gameJava.rolGame.admin.MenuAdmin;
 import gameJava.rolGame.models.Personaje;
+import gameJava.rolGame.users.MenuUser;
 
 import java.sql.*;
 
 public class DbUsers {
 
     DbConnect dbConnect = new DbConnect();
+    MenuAdmin AdmMenu = new MenuAdmin();
+    MenuUser UserMenu = new MenuUser();
 
     public void createNewTableUser() {
 
@@ -119,7 +123,7 @@ public class DbUsers {
         return false;
     }
 
-    public int loginDB(String userName, String userPass) {
+    public void loginDB(String userName, String userPass) {
 
         String sql = "SELECT name, password, adm FROM users";
 
@@ -137,19 +141,18 @@ public class DbUsers {
 
                         boolean dbAdmin = rs.getBoolean("adm");
                         if (dbAdmin) {
-                            return 666;
+                            AdmMenu.setMenu();
                         } else {
-                            return 1;
+                            UserMenu.setMenu();
                         }
-                    } else {
                         break;
                     }
+                    break;
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return 0;
     }
 
     public boolean seeStatsUserDB(int id, boolean delete) {

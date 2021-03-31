@@ -14,24 +14,18 @@ public class MenuAdmin {
     public void setMenu() {
 
         msg.print(msg.menuAdmin);
+        /*
         int option = Integer.parseInt(scan.nextLine());
 
         switch (option) {
-            case 1:
-                setMenuNPC();
-                break;
-
-            case 2:
-                setMenuUser();
-
-            case 3:
-                System.exit(0);
-
-            default:
+            case 1 -> setMenuNPC();
+            case 2 -> setMenuUser();
+            case 3 -> System.exit(0);
+            default -> {
                 setMenu();
                 throw new IllegalStateException(msg.errNumeric + option);
-
-        }
+            }
+        }*/
     }
 
     public void setMenuNPC() {

@@ -2,9 +2,12 @@ package gameJava.rolGame;
 
 import gameJava.rolGame.dbWork.DBWork;
 import gameJava.rolGame.users.Users;
+import gameJava.rolGame.frms.frmInitial;
 
 import javax.swing.*;
 import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 
 class Game {
@@ -16,13 +19,13 @@ class Game {
         Messages msg = new Messages();
         Scanner scan = new Scanner(System.in);
 
-        // FORMULARIOS
-        //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        //frmGame frmGame = new frmGame();
-        //frmGame.setVisible(true);
+        // FORMULARIO INICIAL
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        frmInitial frmInitial = new frmInitial();
+
+        frmInitial.setVisible(true);
 
         msg.print(msg.welcome);
-
 
         boolean verifyCreateDb = database.createAppDatabase();
         msg.print(msg.dbConnection + verifyCreateDb + "\n");
