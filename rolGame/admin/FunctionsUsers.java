@@ -1,6 +1,6 @@
-package gameJava.rolGame.admin;
+package rolGame.admin;
 
-import gameJava.rolGame.Messages;
+import rolGame.Messages;
 
 import java.util.Scanner;
 
@@ -12,9 +12,10 @@ public class FunctionsUsers {
     int idUser;
 
     public void seeStatsUser(String dbNameUser, String dbPass, String dbClass, int dbStr,
-                            int dbAgi, int dbInt, int dbSpeed, int dbLife, int dbArmor,
-                            int dbLifeMax, int dbLifeMin, int dbLevel, int dbExp, int dbExpUp,
-                            int adm) {
+                             int dbAgi, int dbInt, int dbSpeed, int dbLife, int dbArmor,
+                             int dbLifeMax, int dbLifeMin, int dbLevel, int dbExp, int dbExpUp,
+                             int adm) {
+
 
         msg.print(msg.nameUser + dbNameUser + ", " + msg.passUser + dbPass + ", " +
                 msg.classUser + dbClass + ", " + msg.admUser + adm + "\n"

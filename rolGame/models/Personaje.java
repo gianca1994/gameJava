@@ -1,4 +1,4 @@
-package gameJava.rolGame.models;
+package rolGame.models;
 
 
 public class Personaje {

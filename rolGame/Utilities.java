@@ -1,4 +1,4 @@
-package gameJava.rolGame;
+package rolGame;
 
 import java.io.IOException;
 import static java.lang.Thread.sleep;

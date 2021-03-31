@@ -1,4 +1,4 @@
-package gameJava.rolGame.dbWork;
+package rolGame.dbWork;
 
 import java.sql.*;
 

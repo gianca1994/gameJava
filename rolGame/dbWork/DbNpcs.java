@@ -1,6 +1,6 @@
-package gameJava.rolGame.dbWork;
+package rolGame.dbWork;
 
-import gameJava.rolGame.admin.FunctionsNpc;
+import rolGame.admin.FunctionsNpc;
 
 import java.sql.*;
 

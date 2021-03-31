@@ -1,8 +1,8 @@
-package gameJava.rolGame.users;
+package rolGame.users;
 
-import gameJava.rolGame.Messages;
-import gameJava.rolGame.admin.MenuAdmin;
-import gameJava.rolGame.dbWork.DbUsers;
+import rolGame.Messages;
+import rolGame.admin.MenuAdmin;
+import rolGame.dbWork.DbUsers;
 
 import java.util.Scanner;
 
@@ -25,15 +25,7 @@ public class Users {
         userName = setUserName(msg.setUser);
         userPassword = setUserPassword(msg.setPass);
 
-        int checkLogin = dbUsers.loginDB(userName, userPassword);
-
-        if (checkLogin == 1) {
-            UserMenu.setMenu();
-        } else if (checkLogin == 666) {
-            AdmMenu.setMenu();
-        } else {
-            msg.print(msg.errorLogin);
-        }
+        dbUsers.loginDB(userName, userPassword);
     }
 
     public void registerUser() {

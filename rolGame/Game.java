@@ -1,7 +1,8 @@
-package gameJava.rolGame;
+package rolGame;
 
-import gameJava.rolGame.dbWork.DBWork;
-import gameJava.rolGame.users.Users;
+import rolGame.dbWork.DBWork;
+import rolGame.users.Users;
+import rolGame.frms.frmInitial;
 
 import javax.swing.*;
 import java.util.Scanner;
@@ -16,13 +17,13 @@ class Game {
         Messages msg = new Messages();
         Scanner scan = new Scanner(System.in);
 
-        // FORMULARIOS
-        //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        //frmGame frmGame = new frmGame();
-        //frmGame.setVisible(true);
+        // FORMULARIO INICIAL
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        frmInitial frminitial = new frmInitial();
+
+        frminitial.setVisible(true);
 
         msg.print(msg.welcome);
-
 
         boolean verifyCreateDb = database.createAppDatabase();
         msg.print(msg.dbConnection + verifyCreateDb + "\n");
