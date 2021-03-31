@@ -6,20 +6,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class frmLogin extends JFrame {
+public class frmRegister extends JFrame {
     private JPanel rootPanel;
-    private JButton btnBack;
-    private JButton btnLogin;
-    private JTextField txtPassword;
-    private JTextField txtUser;
     private JLabel lblPassword;
+    private JLabel lblClass;
     private JLabel lblUser;
+    private JTextField txtUser;
+    private JTextField txtPassword;
+    private JComboBox comBox;
+    private JButton btnRegister;
+    private JButton btnBack;
 
-    public frmLogin() {
+    public frmRegister() {
 
         add(rootPanel);
         setTitle("Game Of Java");
-        setSize(350, 300);
+        setSize(500, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -33,19 +35,20 @@ public class frmLogin extends JFrame {
             }
         });
 
-        btnLogin.addActionListener(new ActionListener() {
+        btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DbUsers users = new DbUsers();
 
                 String user = String.valueOf(txtUser.getText());
                 String password = String.valueOf(txtPassword.getText());
-                boolean check = users.loginDB(user, password);
+                int clase = (comBox.getSelectedIndex() + 1);
+                boolean check = users.insertUser(user, password, clase);
 
                 if (check){
-                    JOptionPane.showMessageDialog(null, "¡¡Successful Login!! Welcome: " + user + "!!");
+                    JOptionPane.showMessageDialog(null, "¡¡Successful registration!! Welcome: " + user + "!!");
                 }else{
-                    JOptionPane.showMessageDialog(null, "Login failed, try again...");
+                    JOptionPane.showMessageDialog(null, "Registration failed, try again...");
                 }
             }
         });

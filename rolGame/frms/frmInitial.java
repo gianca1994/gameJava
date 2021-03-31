@@ -42,6 +42,14 @@ public class frmInitial extends JFrame{
                 setVisible(false);
             }
         });
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frmRegister abrir = new frmRegister();
+                abrir.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
 
     public void connected (){

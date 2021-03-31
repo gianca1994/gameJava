@@ -123,7 +123,7 @@ public class DbUsers {
         return false;
     }
 
-    public void loginDB(String userName, String userPass) {
+    public boolean loginDB(String userName, String userPass) {
 
         String sql = "SELECT name, password, adm FROM users";
 
@@ -145,7 +145,7 @@ public class DbUsers {
                         } else {
                             UserMenu.setMenu();
                         }
-                        break;
+                        return true;
                     }
                     break;
                 }
@@ -153,6 +153,7 @@ public class DbUsers {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     public boolean seeStatsUserDB(int id, boolean delete) {
