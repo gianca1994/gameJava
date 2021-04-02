@@ -1,12 +1,11 @@
 package rolGame.admin;
 
-import rolGame.Messages;
+import static rolGame.Messages.*;
 import rolGame.dbWork.DbNpcs;
 
 import java.util.Scanner;
 
-public class FunctionsNpc extends Messages {
-    Messages msg = new Messages();
+public class FunctionsNpc {
     Scanner scan = new Scanner(System.in);
     MenuAdmin menuAdm = new MenuAdmin();
 
@@ -27,19 +26,19 @@ public class FunctionsNpc extends Messages {
         exp = setExpNpc();
         gold = setGoldNpc();
 
-        msg.print(msg.confirmAddNpc);
-        msg.print(msg.nameNpc + nameNpc + ", " + msg.dmgMaxNpc + dmgMax + ", " +
-                msg.dmgMinNpc + dmgMin + ", " + msg.armorNpc + armor + ", " + msg.lifeMaxNpc +
-                lifeMax + ", " + msg.lifeMinNpc + lifeMin + ", " + msg.levelNpc + level + ", " +
-                msg.expNpc + exp + ", " + msg.goldNpc + gold);
+        print(CONFIRM_ADD_NPC);
+        print(nameNpc + nameNpc + ", " + DMG_MAX_NPC + dmgMax + ", " +
+                DMG_MIN_NPC + dmgMin + ", " + ARMOR_NPC + armor + ", " + LIFE_MAX_NPC +
+                lifeMax + ", " + LIFE_MIN_NPC + lifeMin + ", " + LEVE_NPC + level + ", " +
+                EXP_NPC + exp + ", " + GOLD_NPC + gold);
 
         if (verifyWorkNpc() == 1) {
             boolean checkNpcAdd = dbNpcs.insertNpcDB(nameNpc, dmgMax, dmgMin, armor,
                     lifeMax, lifeMin, level, exp, gold);
             if (checkNpcAdd) {
-                msg.print(msg.npcAdded);
+                print(NPC_ADDED);
             } else {
-                msg.print(msg.npcFailAdded);
+                print(NPC_FAIL_ADDED);
             }
         }
         menuAdm.setMenu();
@@ -48,11 +47,11 @@ public class FunctionsNpc extends Messages {
     public void seeStatsNpc(String dbNameNpc, int dbDmgMax, int dbDmgMin, int dbArmor,
                             int dbLifeMax, int dbLifeMin, int dbLevel, int dbExp, int dbGold) {
 
-        msg.print(msg.npcStats + dbNameNpc + "");
-        msg.print(msg.dmgMaxNpc + dbDmgMax + ", " + msg.dmgMinNpc + dbDmgMin + ", " +
-                msg.armorNpc + dbArmor + ", " + msg.lifeMaxNpc + dbLifeMax + ", " +
-                msg.lifeMinNpc + dbLifeMin + ", " + msg.levelNpc + dbLevel + ", " +
-                msg.expNpc + dbExp + ", " + msg.goldNpc + dbGold + "\n\n");
+        print(NPC_STATS + dbNameNpc + "");
+        print(DMG_MAX_NPC + dbDmgMax + ", " + DMG_MIN_NPC + dbDmgMin + ", " +
+                ARMOR_NPC + dbArmor + ", " + LIFE_MAX_NPC + dbLifeMax + ", " +
+                LIFE_MIN_NPC + dbLifeMin + ", " + LEVE_NPC + dbLevel + ", " +
+                EXP_NPC + dbExp + ", " + GOLD_NPC + dbGold + "\n\n");
 
         menuAdm.setMenu();
     }
@@ -68,16 +67,16 @@ public class FunctionsNpc extends Messages {
         exp = setExpNpc();
         gold = setGoldNpc();
 
-        msg.print(msg.confirmEditNpc);
+        print(CONFIRM_EDIT_NPC);
 
         seeInfoNPC(dbNpcName, dmgMax, dmgMin, armor, lifeMax, lifeMin, level, exp, gold);
 
         if (verifyWorkNpc() == 1) {
-            msg.print(msg.npcEdited);
+            print(NPC_EDITED);
             return new int[]{dmgMax, dmgMin, armor,
                     lifeMax, lifeMin, level, exp, gold};
         } else {
-            msg.print(msg.npcFailEdited);
+            print(NPC_FAIL_EDITED);
         }
         menuAdm.setMenu();
         return new int[]{};
@@ -90,104 +89,104 @@ public class FunctionsNpc extends Messages {
         idNpc = setDeleteIdNpc();
         boolean checkNpcDeleted = dbNpcs.seeStatsNpcDB(idNpc, true);
 
-        msg.print(msg.confirmDeleteNpc);
+        print(CONFIRM_DELETE_NPC);
 
         if (checkNpcDeleted) {
             if (verifyWorkNpc() == 1) {
                 dbNpcs.deleteNpcDB(idNpc);
-                msg.print(msg.npcDeleted);
+                print(NPC_DELETED);
             }
         } else {
-            msg.print(msg.npcFailDeleted);
+            print(NPC_FAIL_DELETED);
         }
         menuAdm.setMenu();
     }
 
     public int verifyWorkNpc() {
-        msg.print("1- Yes / 2- No");
+        print("1- Yes / 2- No");
         return Integer.parseInt(scan.nextLine());
     }
 
     public int setSeeIdNpc() {
 
-        msg.print(msg.seeNpcID);
+        print(SEE_NPC_ID);
         idNpc = Integer.parseInt(scan.nextLine());
         return idNpc;
     }
 
     public int setEditIdNpc() {
 
-        msg.print(msg.editNpcID);
+        print(EDIT_NPC_ID);
         idNpc = Integer.parseInt(scan.nextLine());
         return idNpc;
     }
 
     public int setDeleteIdNpc() {
 
-        msg.print(msg.deleteNpcID);
+        print(DELETE_NPC_IP);
         idNpc = Integer.parseInt(scan.nextLine());
         return idNpc;
     }
 
     public String setNameNpc() {
 
-        msg.print(msg.nameNpc);
+        print(nameNpc);
         nameNpc = scan.nextLine();
         return nameNpc;
     }
 
     public int setDmgMaxNpc() {
 
-        msg.print(msg.dmgMaxNpc);
+        print(DMG_MAX_NPC);
         dmgMax = Integer.parseInt(scan.nextLine());
         return dmgMax;
     }
 
     public int setDmgMinNpc() {
 
-        msg.print(msg.dmgMinNpc);
+        print(DMG_MIN_NPC);
         dmgMin = Integer.parseInt(scan.nextLine());
         return dmgMin;
     }
 
     public int setArmorNpc() {
 
-        msg.print(msg.armorNpc);
+        print(ARMOR_NPC);
         armor = Integer.parseInt(scan.nextLine());
         return armor;
     }
 
     public int setLifeMaxNpc() {
 
-        msg.print(msg.lifeMaxNpc);
+        print(LIFE_MAX_NPC);
         lifeMax = Integer.parseInt(scan.nextLine());
         return lifeMax;
     }
 
     public int setLifeMinNpc() {
 
-        msg.print(msg.lifeMinNpc);
+        print(LIFE_MIN_NPC);
         lifeMin = Integer.parseInt(scan.nextLine());
         return lifeMin;
     }
 
     public int setLevelNpc() {
 
-        msg.print(msg.levelNpc);
+        print(LEVE_NPC);
         level = Integer.parseInt(scan.nextLine());
         return level;
     }
 
     public int setExpNpc() {
 
-        msg.print(msg.expNpc);
+        print(EXP_NPC);
         exp = Integer.parseInt(scan.nextLine());
         return exp;
     }
 
     public int setGoldNpc() {
 
-        msg.print(msg.goldNpc);
+        print(GOLD_NPC);
         gold = Integer.parseInt(scan.nextLine());
         return gold;
     }
@@ -195,9 +194,9 @@ public class FunctionsNpc extends Messages {
     public void seeInfoNPC(String name, int dmgMax, int dmgMin, int armor,
                            int lifeMax, int lifeMin, int level, int exp, int gold) {
 
-        msg.print(msg.nameNpc + name + ", " + msg.dmgMaxNpc + dmgMax + ", " +
-                msg.dmgMinNpc + dmgMin + ", " + msg.armorNpc + armor + ", " + msg.lifeMaxNpc +
-                lifeMax + ", " + msg.lifeMinNpc + lifeMin + ", " + msg.levelNpc + level + ", " +
-                msg.expNpc + exp + ", " + msg.goldNpc + gold);
+        print(nameNpc + name + ", " + DMG_MAX_NPC + dmgMax + ", " +
+                DMG_MIN_NPC + dmgMin + ", " + ARMOR_NPC + armor + ", " + LIFE_MAX_NPC +
+                lifeMax + ", " + LIFE_MIN_NPC + lifeMin + ", " + LEVE_NPC + level + ", " +
+                EXP_NPC + exp + ", " + GOLD_NPC + gold);
     }
 }

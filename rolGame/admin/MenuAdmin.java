@@ -1,19 +1,19 @@
 package rolGame.admin;
 
-import rolGame.Messages;
 import rolGame.dbWork.DbNpcs;
 import rolGame.dbWork.DbUsers;
 
 import java.util.Scanner;
 
+import static rolGame.Messages.*;
+
 public class MenuAdmin {
 
-    Messages msg = new Messages();
     Scanner scan = new Scanner(System.in);
 
     public void setMenu() {
 
-        msg.print(msg.menuAdmin);
+        print(MENU_ADMIN);
         /*
         int option = Integer.parseInt(scan.nextLine());
 
@@ -33,7 +33,7 @@ public class MenuAdmin {
         DbNpcs dbNpcs = new DbNpcs();
         FunctionsNpc functions = new FunctionsNpc();
 
-        msg.print(msg.menuNPCAdmin);
+        print(MENU_NPC_ADMIN);
         int opt = Integer.parseInt(scan.nextLine());
 
         switch (opt) {
@@ -70,7 +70,7 @@ public class MenuAdmin {
 
             default:
                 setMenu();
-                throw new IllegalStateException(msg.errNumeric + opt);
+                throw new IllegalStateException(ERR_NUMERIC + opt);
 
         }
     }
@@ -80,7 +80,7 @@ public class MenuAdmin {
         FunctionsUsers functionsUsers = new FunctionsUsers();
         DbUsers dbUser = new DbUsers();
 
-        msg.print(msg.menuUsersAdmin);
+        print(MENU_USER_ADMIN);
         int opt = Integer.parseInt(scan.nextLine());
 
         switch (opt) {
@@ -91,7 +91,7 @@ public class MenuAdmin {
                 System.exit(0);
             default:
                 setMenu();
-                throw new IllegalStateException(msg.errNumeric + opt);
+                throw new IllegalStateException(ERR_NUMERIC + opt);
         }
     }
 }

@@ -1,14 +1,12 @@
 package rolGame.users;
 
-import rolGame.Messages;
+import static rolGame.Messages.*;
 
 public class MenuUser {
 
     public void setMenu() {
 
-        Messages msg = new Messages();
-
-        msg.print(msg.menuUser);
+        print(MENU_USER);
 
     }
 }

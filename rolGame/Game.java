@@ -7,6 +7,8 @@ import rolGame.frms.frmInitial;
 import javax.swing.*;
 import java.util.Scanner;
 
+import static rolGame.Messages.*;
+
 
 class Game {
 
@@ -14,7 +16,6 @@ class Game {
         DBWork database = new DBWork();
         Users users = new Users();
         Utilities util = new Utilities();
-        Messages msg = new Messages();
         Scanner scan = new Scanner(System.in);
 
         // FORMULARIO INICIAL
@@ -23,14 +24,14 @@ class Game {
 
         frminitial.setVisible(true);
 
-        msg.print(msg.welcome);
+        print(WELCOME);
 
         boolean verifyCreateDb = database.createAppDatabase();
-        msg.print(msg.dbConnection + verifyCreateDb + "\n");
+        print(DB_CONNECTION + verifyCreateDb + "\n");
 
         util.timer(1);
 
-        msg.print(msg.loginOrRegister);
+        print(LOGIN_REGISTER);
 
         int opt = Integer.parseInt(scan.nextLine());
         util.clear();
@@ -38,7 +39,7 @@ class Game {
         switch (opt) {
             case 1 -> users.loginUser();
             case 2 -> users.registerUser();
-            default -> throw new IllegalStateException(msg.errNumeric + opt);
+            default -> throw new IllegalStateException(ERR_NUMERIC + opt);
         }
     }
 

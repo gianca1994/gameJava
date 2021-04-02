@@ -2,27 +2,26 @@ package rolGame;
 
 public class Messages {
 
-    public void print(String msg) {
+    public static void print(String msg) {
         System.out.println(msg);
     }
 
-
     //////////// CONSTANTES PARA LA BASE DE DATOS ////////////
-    public final String dbConnection = "Database connection: ";
-    public final String appName = "DataBase";
-    public final String dbPatch = "src/rolGame/";
-    public final String dbType = "jdbc:sqlite:";
-    public final String dbExtension = ".db";
+    public static final String DB_CONNECTION = "Database connection: ";
+    public static final String APP_NAME = "DataBase";
+    public static final String DB_PATCH = "src/rolGame/";
+    public static final String DB_TYPE = "jdbc:sqlite:";
+    public static final String DB_EXTENSION = ".db";
     ///////// FIN DE CONSTANTES PARA LA BASE DE DATOS /////////
 
 
     //////////// CONSTANTES PARA EL MANEJO DE ERRORES ////////////
-    public final String errNumeric = "Unexpected value: ";
+    public static final String ERR_NUMERIC = "Unexpected value: ";
     ///////// FIN DE CONSTANTES PARA EL MANEJO DE ERRORES ////////
 
 
     /////////// CONSTANTES PARA MENSAJES DE BIENVENIDAS ///////////
-    public final String welcome = """
+    public static final String WELCOME = """
             **********************************************************************
             **** Welcome to Game Of Java, we hope you enjoy your stay at GOJ! ****
             **********************************************************************
@@ -31,41 +30,41 @@ public class Messages {
 
 
     ///////// CONSTANTES PARA EL LOGIN DE UN USER /////////
-    public final String login = "To continue, log in...";
-    public final String setUser = "Enter Username:";
-    public final String setPass = "Enter Password:";
-    public final String errorLogin = "¡¡Error trying to login!!";
-    public final String userRegistered = "¡¡Registered user!!";
-    public final String errorUserRegistered = "¡¡Error trying to register!!";
+    public static final String LOGIN = "To continue, log in...";
+    public static final String SET_USER = "Enter Username:";
+    public static final String SET_PASS = "Enter Password:";
+    public static final String ERROR_LOGIN = "¡¡Error trying to login!!";
+    public static final String USER_REGISTERED = "¡¡Registered user!!";
+    public static final String ERROR_USER_REGISTERED = "¡¡Error trying to register!!";
 
     /////////// FIN DE CONSTANTES PARA EL LOGIN ///////////
 
 
     ///////// CONSTANTES PARA EL REGISTRO DE UN NUEVO USER /////////
-    public final String register = "To continue, Register...";
-    public final String setNewUser = "Enter new Username:";
-    public final String setNewPass = "Enter new Password:";
-    public final String setNewClass = "Select a class: 1-Warrior, 2-Mage, 3-Archer:";
+    public static final String REGISTER = "To continue, Register...";
+    public static final String SET_NEW_USER = "Enter new Username:";
+    public static final String SET_NEW_PASS = "Enter new Password:";
+    public static final String SET_NEW_CLASS = "Select a class: 1-Warrior, 2-Mage, 3-Archer:";
     ///////// FIN DE CONSTANTES PARA EL REGISTRO DE UN USER /////////
 
 
     ///////// CONSTANTES PARA LOS MENU /////////
-    public final String loginOrRegister = """
+    public static final String LOGIN_REGISTER = """
             Login or register to continue.
             Type 1-For login o 2-For register""";
 
-    public final String menuUser = """
+    public static final String MENU_USER = """
             Welcome select an option to continue ...
             1- Pve Npc
             2- Pvp Users""";
 
-    public final String menuAdmin = """
+    public static final String MENU_ADMIN = """
             Select an option to continue:
             1- Work NPCs
             2- Work Users
             3- Exit""";
 
-    public final String menuNPCAdmin = """
+    public static final String MENU_NPC_ADMIN = """
             Select an option to continue:
             1- Add new NPC
             2- See Npc
@@ -73,7 +72,7 @@ public class Messages {
             4- Delete Npc
             5- Exit""";
 
-    public final String menuUsersAdmin = """
+    public static final String MENU_USER_ADMIN = """
             Select an option to continue:
             1- See User
             2- Exit""";
@@ -81,58 +80,58 @@ public class Messages {
 
 
     ///////// CONSTANTES PARA AGREGAR UN NUEVO NPC /////////
-    public final String nameNpc = "Name: ";
-    public final String dmgMaxNpc = "DmgMax: ";
-    public final String dmgMinNpc = "DmgMin: ";
-    public final String armorNpc = "Armor: ";
-    public final String lifeMaxNpc = "LifeMax: ";
-    public final String lifeMinNpc = "LifeMin: ";
-    public final String levelNpc = "Level: ";
-    public final String expNpc = "Exp: ";
-    public final String goldNpc = "Gold: ";
+    public static final String NAME_NPC = "Name: ";
+    public static final String DMG_MAX_NPC = "DmgMax: ";
+    public static final String DMG_MIN_NPC = "DmgMin: ";
+    public static final String ARMOR_NPC = "Armor: ";
+    public static final String LIFE_MAX_NPC = "LifeMax: ";
+    public static final String LIFE_MIN_NPC = "LifeMin: ";
+    public static final String LEVE_NPC = "Level: ";
+    public static final String EXP_NPC = "Exp: ";
+    public static final String GOLD_NPC = "Gold: ";
     /////////  FIN DE CONSTANTES PARA AGREGAR NPC /////////
 
 
     //////////// CONSTANTES PARA LOS USUARIOS ////////////
-    public final String nameUser = "Name: ";
-    public final String passUser = "Password: ";
-    public final String classUser = "Class: ";
-    public final String strUser = "Str: ";
-    public final String agiUser = "Agi: ";
-    public final String intUser = "Int: ";
-    public final String speedUser = "Speed: ";
-    public final String lifeUser = "Life: ";
-    public final String armorUser = "Armor: ";
-    public final String lifeMaxUser = "lifeMax: ";
-    public final String lifeMinUser = "lifeMin: ";
-    public final String levelUser = "Level: ";
-    public final String expUser = "Exp: ";
-    public final String expUpUser = "ExpUp: ";
-    public final String admUser = "Admin: ";
+    public static final String NAME_USER = "Name: ";
+    public static final String PASS_USER = "Password: ";
+    public static final String CLASS_USER = "Class: ";
+    public static final String STR_USER = "Str: ";
+    public static final String AGI_USER = "Agi: ";
+    public static final String INT_USER = "Int: ";
+    public static final String SPEED_USER = "Speed: ";
+    public static final String LIFE_USER = "Life: ";
+    public static final String ARMOR_USER = "Armor: ";
+    public static final String LIFE_MAX_USER = "lifeMax: ";
+    public static final String LIFE_MIN_USER = "lifeMin: ";
+    public static final String LEVEL_USER = "Level: ";
+    public static final String EXP_USER = "Exp: ";
+    public static final String EXP_UP_USER = "ExpUp: ";
+    public static final String ADM_USER = "Admin: ";
     /////////  FIN DE CONSTANTES PARA LOS USUARIOS /////////
 
 
     /////////////// CONSTANTES PARA EL ADMIN ///////////////
-    public final String seeNpcID = "Select the ID of the npc to see: ";
-    public final String npcStats = "Npc stats: ";
+    public static final String SEE_NPC_ID = "Select the ID of the npc to see: ";
+    public static final String NPC_STATS = "Npc stats: ";
 
-    public final String confirmAddNpc = "Are you sure you want to add the npc?";
-    public final String npcAdded = "¡¡Npc added!!";
-    public final String npcFailAdded = "¡¡Error adding the npc!!";
+    public static final String CONFIRM_ADD_NPC = "Are you sure you want to add the npc?";
+    public static final String NPC_ADDED = "¡¡Npc added!!";
+    public static final String NPC_FAIL_ADDED = "¡¡Error adding the npc!!";
 
-    public final String editNpcID = "Select the ID of the npc to edit:";
-    public final String confirmEditNpc = "Are you sure you want to edit the npc?";
-    public final String npcEdited = "¡¡Npc Edited!!";
-    public final String npcFailEdited = "¡¡Error editing the npc!!";
+    public static final String EDIT_NPC_ID = "Select the ID of the npc to edit:";
+    public static final String CONFIRM_EDIT_NPC = "Are you sure you want to edit the npc?";
+    public static final String NPC_EDITED = "¡¡Npc Edited!!";
+    public static final String NPC_FAIL_EDITED = "¡¡Error editing the npc!!";
 
-    public final String deleteNpcID = "Select the ID of the npc to delete:";
-    public final String confirmDeleteNpc = "Are you sure you want to delete the npc?";
-    public final String npcDeleted = "¡¡Npc Deleted!!";
-    public final String npcFailDeleted = "¡¡Error deleting the npc!!";
+    public static final String DELETE_NPC_IP = "Select the ID of the npc to delete:";
+    public static final String CONFIRM_DELETE_NPC = "Are you sure you want to delete the npc?";
+    public static final String NPC_DELETED = "¡¡Npc Deleted!!";
+    public static final String NPC_FAIL_DELETED = "¡¡Error deleting the npc!!";
 
     /////////// FIN DE CONSTANTES PARA NPC Y COMIENZO DE CONSTANTES PARA USUARIO ///////////
 
-    public final String seeUserID = "Select the ID of the user to see: ";
+    public static final String SEE_USER_ID = "Select the ID of the user to see: ";
     /////////// FIN DE CONSTANTES PARA EL ADMIN ///////////
 
 }

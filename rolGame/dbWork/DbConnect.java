@@ -1,19 +1,19 @@
 package rolGame.dbWork;
 
-import rolGame.Messages;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnect extends Messages{
+import static rolGame.Messages.*;
+
+public class DbConnect {
 
     public String AppDatabasePath() {
-        return dbPatch + appName + dbExtension;
+        return DB_PATCH + APP_NAME + DB_EXTENSION;
     }
 
     public String AppDatabase() {
-        return dbType + AppDatabasePath();
+        return DB_TYPE + AppDatabasePath();
     }
 
     public Connection connect() {
@@ -21,7 +21,7 @@ public class DbConnect extends Messages{
         try {
             conn = DriverManager.getConnection(AppDatabase());
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            print(e.getMessage());
         }
         return conn;
     }

@@ -1,11 +1,10 @@
 package rolGame.admin;
 
-import rolGame.Messages;
+import static rolGame.Messages.*;
 
 import java.util.Scanner;
 
 public class FunctionsUsers {
-    Messages msg = new Messages();
     Scanner scan = new Scanner(System.in);
     MenuAdmin menuAdm = new MenuAdmin();
 
@@ -17,22 +16,22 @@ public class FunctionsUsers {
                              int adm) {
 
 
-        msg.print(msg.nameUser + dbNameUser + ", " + msg.passUser + dbPass + ", " +
-                msg.classUser + dbClass + ", " + msg.admUser + adm + "\n"
+        print(NAME_USER + dbNameUser + ", " + PASS_USER + dbPass + ", " +
+                CLASS_USER + dbClass + ", " + ADM_USER + adm + "\n"
 
-                + msg.strUser + dbStr + ", " + msg.agiUser + dbAgi + ", " + msg.intUser + dbInt +
-                ", " + msg.speedUser + dbSpeed + ", " + msg.lifeUser + dbLife + "\n"
+                + STR_USER + dbStr + ", " + AGI_USER + dbAgi + ", " + INT_USER + dbInt +
+                ", " + SPEED_USER + dbSpeed + ", " + LIFE_USER + dbLife + "\n"
 
-                + msg.armorUser + dbArmor + ", " + msg.lifeMaxUser + dbLifeMax + ", " +
-                msg.lifeMinUser + dbLifeMin + ", " + msg.levelUser + dbLevel + ", " + msg.expUser
-                + dbExp + ", " + msg.expUpUser + dbExpUp + "\n");
+                + ARMOR_USER + dbArmor + ", " + LIFE_MAX_USER + dbLifeMax + ", " +
+                LIFE_MIN_USER + dbLifeMin + ", " + LEVEL_USER + dbLevel + ", " + EXP_USER
+                + dbExp + ", " + EXP_UP_USER + dbExpUp + "\n");
 
         menuAdm.setMenu();
     }
 
     public int setSeeIdUser() {
 
-        msg.print(msg.seeUserID);
+        print(SEE_USER_ID);
         idUser = Integer.parseInt(scan.nextLine());
         return idUser;
     }

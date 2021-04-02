@@ -1,6 +1,6 @@
 package rolGame.users;
 
-import rolGame.Messages;
+import static rolGame.Messages.*;
 import rolGame.admin.MenuAdmin;
 import rolGame.dbWork.DbUsers;
 
@@ -9,9 +9,6 @@ import java.util.Scanner;
 public class Users {
 
     Scanner scan = new Scanner(System.in);
-    Messages msg = new Messages();
-    MenuAdmin AdmMenu = new MenuAdmin();
-    MenuUser UserMenu = new MenuUser();
     DbUsers dbUsers = new DbUsers();
 
     String userName, userPassword;
@@ -20,48 +17,48 @@ public class Users {
 
     public void loginUser() {
 
-        msg.print(msg.login);
+        print(LOGIN);
 
-        userName = setUserName(msg.setUser);
-        userPassword = setUserPassword(msg.setPass);
+        userName = setUserName(SET_USER);
+        userPassword = setUserPassword(SET_PASS);
 
         dbUsers.loginDB(userName, userPassword);
     }
 
     public void registerUser() {
 
-        msg.print(msg.register);
+        print(REGISTER);
 
-        userName = setUserName(msg.setNewUser);
-        userPassword = setUserPassword(msg.setNewPass);
-        userClass = setUserClass(msg.setNewClass);
+        userName = setUserName(SET_NEW_USER);
+        userPassword = setUserPassword(SET_NEW_PASS);
+        userClass = setUserClass();
 
         checkRegister = dbUsers.insertUser(userName, userPassword, userClass);
 
         if (checkRegister) {
-            msg.print(msg.userRegistered);
+            print(USER_REGISTERED);
         } else {
-            msg.print(msg.errorUserRegistered);
+            print(ERROR_USER_REGISTERED);
         }
     }
 
     private String setUserName(String type) {
 
-        msg.print(type);
+        print(type);
         userName = scan.nextLine();
         return userName;
     }
 
     private String setUserPassword(String type) {
 
-        msg.print(type);
+        print(type);
         userPassword = scan.nextLine();
         return userPassword;
     }
 
-    private int setUserClass(String type) {
+    private int setUserClass() {
 
-        msg.print(type);
+        print(SET_NEW_CLASS);
         userClass = Integer.parseInt(scan.nextLine());
         return userClass;
     }

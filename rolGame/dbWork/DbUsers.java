@@ -140,6 +140,7 @@ public class DbUsers {
                     if (dbPass.equals(userPass)) {
 
                         boolean dbAdmin = rs.getBoolean("adm");
+
                         if (dbAdmin) {
                             AdmMenu.setMenu();
                         } else {
